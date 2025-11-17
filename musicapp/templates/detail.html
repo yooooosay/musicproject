@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Music Detail{% endblock %}
+
+{% block contents %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col offset-3">
+            <!-- タイトル -->
+            <h2>{{ object.title }}</h2>
+
+            <!-- コメント -->
+            <p>{{ object.comment }}</p>
+
+            <br>
+
+            <!-- 投稿日時 -->
+            <p>{{ object.posted_at }} に投稿</p>
+
+            <!-- 画像 -->
+            {% if object.image1 %}
+                <div class="my-3">
+                    {% if object.youtube_link %}
+                        <a href="{{ object.youtube_link }}" target="_blank">
+                            <img src="{{ object.image1.url }}" class="img-fluid" alt="投稿画像">
+                        </a>
+                    {% else %}
+                        <img src="{{ object.image1.url }}" class="img-fluid" alt="投稿画像">
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <!-- YouTube埋め込み -->
+            {% if object.youtube_link %}
+                {% with object.youtube_link|cut:"https://www.youtube.com/watch?v=" as video_id %}
+                    <div class="my-3">
+                        <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/{{ video_id }}"
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                {% endwith %}
+            {% endif %}
+
+            <!-- 投稿者本人なら削除ボタン表示 -->
+            {% if request.user == object.user %}
+                <a href="{% url 'music:music_delete' object.pk %}"
+                   class="btn btn-danger my-2">削除する</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
