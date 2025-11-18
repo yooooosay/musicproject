@@ -1,20 +1,20 @@
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Music PlayList</h1>
-        <p class="lead text-body-secondary">自分だけのお気に入りプレイリストを作ろう！！</p>
-        <p>
-          {% if user.is_authenticated %}
-          <a href="{% url 'music:post' %}" class="btn btn-primary">投稿する</a>
-          <form method="post" action="{% url 'accounts:logout' %}">
+<section class="py-5 text-center container" style="color: #ffffff;">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Music PlayList</h1>
+      <p class="lead" style="color: #bbbbbb;">自分だけのお気に入りプレイリストを作ろう！！</p>
+      <p>
+        {% if user.is_authenticated %}
+          <a href="{% url 'music:post' %}" class="btn btn-primary my-2">投稿する</a>
+          <form method="post" action="{% url 'accounts:logout' %}" style="display:inline;">
             {% csrf_token %}
-          <button type="submit">ログアウト</button>
+            <button type="submit"class="btn btn-outline-light my-2">ログアウト</button>
           </form>
         {% else %}
           <a href="{% url 'accounts:signup' %}" class="btn btn-primary my-2">サインアップ</a>
-          <a href="{% url 'accounts:login' %}" class="btn btn-secondary my-2">ログイン</a>
+          <a href="{% url 'accounts:login' %}" class="btn btn-outline-light my-2">ログイン</a>
         {% endif %}
-        </p>
-      </div>
+      </p>
     </div>
-  </section>
+  </div>
+</section>

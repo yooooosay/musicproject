@@ -1,90 +1,122 @@
 {% load static %}
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.112.5">
-    <title>{% block title %}{% endblock %}</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+  <style>
+    body {
+      background-color: #121212; 
+      color: #e0e0e0;
+      font-family: 'Roboto', sans-serif;
+    }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
     
-   <header>
-    <div class="collapse text-bg-dark" id="navbarHeader">
-     <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">お気に入りの曲をプレイリストに追加しよう！</h4>
-          <p class="text-method">
-            誰でもお気に入りのプレイリストを作成できるサイトです。
-            好きな曲、カテゴリー何でも追加OK!
-            コメントや曲の説明などもぜひ書いて自分の気に入るプレイリストを作ってください！
-          </p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">コンタクト</h4>
-          <ul class="list-unstyled">
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'music:mypage' %}" class="text-white">マイページ</a></li>
-            <li><a href="{% url 'accounts:logout' %}" class="text-white">ログアウト</a></li>
-            <li><a href="{% url 'accounts:password_reset' %}" class="text-white">パスワードリセット</a></li>
-            <li><a href="mailto:3103yousay@gmail.com" class="text-white">Email me</a></li>
-          {% else %}
-            <li><a href="{% url 'accounts:signup' %}" class="text-white">サインアップ</a></li>
-            <li><a href="{% url 'accounts:login' %}" class="text-white">ログイン</a></li>
-            <li><a href="3103yousay@gmail.com" class="text-white">Email me</a></li>
-          {% endif %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container">
+    .navbar, .navbar-toggler {
+      background-color: #1f1f1f;
+    }
+    .navbar a {
+      color: #ff6b6b;
+      font-weight: 500;
+    }
+    .navbar a:hover {
+      color: #ff4c4c;
+      text-decoration: none;
+    }
+
+    .music-card {
+      background-color: #2a2a2a; 
+      border-radius: 12px;
+      padding: 15px;
+      transition: transform 0.2s;
+    }
+    .music-card:hover {
+      transform: scale(1.05);
+    }
+    .music-card img {
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+    }
+    .music-card .card-body {
+      padding: 10px 0;
+    }
+    .music-card h6 {
+      color: #ffffff; 
+    }
+    .music-card p {
+      color: #bbbbbb; 
+    }
+    .music-card .btn-play {
+      background-color: #dc3545;
+      border: none;
+      color: #fff;
+    }
+    .music-card .btn-play:hover {
+      background-color: #ff5c5c;
+    }
+
+    /* フッター */
+    footer {
+      background-color: #1f1f1f;
+      color: #aaa;
+      border-top: 1px solid #333;
+      padding: 15px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar navbar-dark shadow-sm">
+    <div class="container d-flex justify-content-between align-items-center">
       <a href="{% url 'music:index' %}" class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        <strong>Music PlayList</strong>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ff6b6b" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M10 8v8l6-4z"/>
+        </svg>
+        <strong class="ms-2">MusicPlay</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div>
+        {% if user.is_authenticated %}
+          <a href="{% url 'music:mypage' %}" class="me-3">マイページ</a>
+          <a href="{% url 'accounts:logout' %}" class="me-3">ログアウト</a>
+        {% else %}
+          <a href="{% url 'accounts:signup' %}" class="me-3">サインアップ</a>
+          <a href="{% url 'accounts:login' %}" class="me-3">ログイン</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 </header>
 
-<main>
-{% block contents %}{% endblock %}
+<main class="container py-5">
+  <div class="row g-4">
+    {% block contents %}
+    <!-- 曲カード例 -->
+    <div class="col-md-3 col-sm-6">
+      <div class="music-card">
+        <img src="{% static 'images/sample_album.jpg' %}" alt="アルバム">
+        <div class="card-body">
+          <h6>曲名タイトル</h6>
+          <p class="text-muted small">アーティスト名</p>
+          <button class="btn btn-sm btn-play">▶ 再生</button>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </div>
 </main>
 
-<footer class="text-body-secondary py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">gallery is &copy; Bootstrap, but please post a lot!</p>
-  </div>
+<footer>
+  <p>&copy; 2025 MusicPlay. All rights reserved.</p>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
