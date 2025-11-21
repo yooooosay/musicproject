@@ -86,7 +86,10 @@
         <a href="{% url 'music:contact' %}" class="me-3">お問い合わせ</a>
         {% if user.is_authenticated %}
           <a href="{% url 'music:mypage' %}" class="me-3">マイページ</a>
-          <a href="{% url 'accounts:logout' %}" class="me-3">ログアウト</a>
+          <form method="post" action="{% url 'accounts:logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit"class="btn btn-outline-light my-2">ログアウト</button>
+          </form>
         {% else %}
           <a href="{% url 'accounts:signup' %}" class="me-3">サインアップ</a>
           <a href="{% url 'accounts:login' %}" class="me-3">ログイン</a>
