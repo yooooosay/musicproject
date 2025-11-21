@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}お問い合わせ{% endblock %}
+
+{% block contents %}
+<h2 class="mb-4">お問い合わせ</h2>
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    {{ form.name.label_tag }}
+    {{ form.name }}
+    {% for error in form.name.errors %}
+      <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.email.label_tag }}
+    {{ form.email }}
+    {% for error in form.email.errors %}
+      <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.title.label_tag }}
+    {{ form.title }}
+    {% for error in form.title.errors %}
+      <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.message.label_tag }}
+    {{ form.message }}
+    {% for error in form.message.errors %}
+      <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <button type="submit" class="btn btn-danger">送信</button>
+</form>
+{% endblock %}

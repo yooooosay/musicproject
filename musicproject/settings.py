@@ -132,9 +132,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # settings.py
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = '3103yousay@gmail.com'
-EMAIL_HOST = 'smtp.gmail.com'
+DEFAULT_FROM_EMAIL = 'tdn2532044@stu.o-hara.ac.jp'
+EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '3103yousay@gmail.com'
-EMAIL_HOST_PASSWORD = 'yousay3103'
+EMAIL_HOST_USER = 'tdn2532044@stu.o-hara.ac.jp'
+EMAIL_HOST_PASSWORD = '3103Yousay'
 EMAIL_USE_TLS = True

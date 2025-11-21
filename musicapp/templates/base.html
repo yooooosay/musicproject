@@ -15,7 +15,6 @@
       font-family: 'Roboto', sans-serif;
     }
 
-    
     .navbar, .navbar-toggler {
       background-color: #1f1f1f;
     }
@@ -60,7 +59,6 @@
       background-color: #ff5c5c;
     }
 
-    /* フッター */
     footer {
       background-color: #1f1f1f;
       color: #aaa;
@@ -82,7 +80,10 @@
         </svg>
         <strong class="ms-2">MusicPlay</strong>
       </a>
-      <div>
+
+      <div class="d-flex align-items-center">
+        <a href="{% url 'music:index' %}" class="me-3">ホーム</a>
+        <a href="{% url 'music:contact' %}" class="me-3">お問い合わせ</a>
         {% if user.is_authenticated %}
           <a href="{% url 'music:mypage' %}" class="me-3">マイページ</a>
           <a href="{% url 'accounts:logout' %}" class="me-3">ログアウト</a>
@@ -96,9 +97,8 @@
 </header>
 
 <main class="container py-5">
+  {% block contents %}
   <div class="row g-4">
-    {% block contents %}
-    <!-- 曲カード例 -->
     <div class="col-md-3 col-sm-6">
       <div class="music-card">
         <img src="{% static 'images/sample_album.jpg' %}" alt="アルバム">
@@ -109,8 +109,8 @@
         </div>
       </div>
     </div>
-    {% endblock %}
   </div>
+  {% endblock %}
 </main>
 
 <footer>

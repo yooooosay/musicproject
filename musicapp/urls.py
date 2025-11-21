@@ -12,4 +12,6 @@ urlpatterns = [
     path('music-detail/<int:pk>/', views.MusicDetailView.as_view(), name='music_detail'),  # ← 修正！
     path('mypage/', views.MypageView.as_view(), name='mypage'),
     path('music/<int:pk>/delete/', views.MusicDeleteView.as_view(), name='music_delete'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
+    path('contact/done/', views.ContactDoneView.as_view(), name='contact_done'),
 ]
