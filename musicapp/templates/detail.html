@@ -31,7 +31,6 @@
                 </div>
             {% endif %}
 
-            <!-- YouTube埋め込み -->
             {% if object.youtube_link %}
                 {% with object.youtube_link|cut:"https://www.youtube.com/watch?v=" as video_id %}
                     <div class="my-3">
@@ -46,7 +45,6 @@
                 {% endwith %}
             {% endif %}
 
-            <!-- 投稿者本人なら削除ボタン表示 -->
             {% if request.user == object.user %}
                 <a href="{% url 'music:music_delete' object.pk %}"
                    class="btn btn-danger my-2">削除する</a>

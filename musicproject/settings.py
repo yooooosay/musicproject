@@ -57,7 +57,7 @@ ROOT_URLCONF = 'musicproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,12 +129,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-# settings.py
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+from django.contrib.messages import constants
+MESSAGE_TAGS = { constants.SUCCESS: 'alert alert-success',}
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 DEFAULT_FROM_EMAIL = 'tdn2532044@stu.o-hara.ac.jp'
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tdn2532044@stu.o-hara.ac.jp'
 EMAIL_HOST_PASSWORD = '3103Yousay'
 EMAIL_USE_TLS = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR)
+MEDIA_URL = '/media/'
